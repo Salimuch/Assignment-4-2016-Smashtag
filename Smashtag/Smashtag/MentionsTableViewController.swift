@@ -32,7 +32,6 @@ class MentionsTableViewController: UITableViewController {
         if let imageMention = tweet?.media where imageMention.count > 0{
                 mentions.append(MentionsStruct(type: "image",
                     mentions: imageMention.map { MentionType.image($0.url, $0.aspectRatio) }))
-            
         }
         if let urlMention = tweet?.urls where urlMention.count > 0 {
                 mentions.append(MentionsStruct(type: "url",
@@ -56,14 +55,12 @@ class MentionsTableViewController: UITableViewController {
     }
     
     // MARK: - View Controller Lifecycle
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
 
     // MARK: - Table view data source
-
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return mentions.count
     }

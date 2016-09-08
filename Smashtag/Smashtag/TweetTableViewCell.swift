@@ -28,14 +28,11 @@ class TweetTableViewCell: UITableViewCell
         static let UserMention = UIColor.blueColor()
     }
     
-    // Раскрашиваем текст твитта
     private func attributionTweetText (tweet: Twitter.Tweet) -> NSMutableAttributedString {
         let attributedString = NSMutableAttributedString(string: tweet.text)
-        
         setCollorAttributes(toAttributedString: attributedString, forMentions: tweet.hashtags, setColor: MentionsColor.Hashtag)
         setCollorAttributes(toAttributedString: attributedString, forMentions: tweet.urls, setColor: MentionsColor.Url)
         setCollorAttributes(toAttributedString: attributedString, forMentions: tweet.userMentions, setColor: MentionsColor.UserMention)
-        
         return attributedString
     }
     

@@ -11,9 +11,7 @@ import Twitter
 
 class TweetTableViewController: UITableViewController, UITextFieldDelegate
 {
-    
     // MARK: Model
-
     var tweets = [Array<Twitter.Tweet>]() {
         didSet {
             tableView.reloadData()
@@ -26,11 +24,13 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
             lastTwitterRequest = nil
             searchForTweets()
             title = searchText
+            if let text = searchText {
+                SearchStore.addRequest(text)
+            }
         }
     }
     
     // MARK: Fetching Tweets
-    
     private var twitterRequest: Twitter.Request? {
         if lastTwitterRequest == nil {
             if let query = searchText where !query.isEmpty {
@@ -66,7 +66,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
     }
     
     // MARK: UITableViewDataSource
-
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "\(tweets.count - section)"
     }
@@ -91,8 +90,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
     }
     
     // MARK: Constants
-    
-    struct Storyboard {
+    private struct Storyboard {
         static let TweetCellIdentifier = "Tweet"
         static let ImageMentionCellIdentifier = "ImageMention"
         static let SegueToMentionTable = "ShowMentions"
@@ -100,7 +98,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
     }
     
     // MARK: Outlets
-
     @IBOutlet weak var searchTextField: UITextField! {
         didSet {
             searchTextField.delegate = self
@@ -109,7 +106,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
     }
     
     // MARK: UITextFieldDelegate
-
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         searchText = textField.text
@@ -117,7 +113,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
     }
     
     // MARK: View Controller Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.estimatedRowHeight = tableView.rowHeight
@@ -139,4 +134,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
             }
         }
     }
+    
+
 }
