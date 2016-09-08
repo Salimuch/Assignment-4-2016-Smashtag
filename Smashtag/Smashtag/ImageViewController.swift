@@ -20,6 +20,10 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    private var isAutozooming = true
+    
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
             scrollView.contentSize = imageView.frame.size
@@ -39,19 +43,34 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
             imageView.image = newValue
             imageView.sizeToFit()
             scrollView?.contentSize = imageView.frame.size
+            spinner?.stopAnimating()
+            isAutozooming = true
+            autozooming()
+        }
+    }
+    
+    private func autozooming() {
+        if isAutozooming {
+            if imageView.bounds.size.width > 0 && imageView.bounds.size.height > 0 {
+                let widthRatio = scrollView.bounds.size.width / imageView.bounds.size.width
+                let heightRatio = scrollView.bounds.size.height / imageView.bounds.size.height
+                scrollView.zoomScale = max(widthRatio,heightRatio)
+                scrollView.contentOffset = CGPoint(x: (imageView.frame.size.width - scrollView.frame.size.width) / 2,
+                                                   y: (imageView.frame.size.height - scrollView.frame.size.height) / 2)
+            }
         }
     }
     
     private func fetchImage() {
         if let url = imageURL {
-            //spinner?.startAnimating()
+            spinner?.startAnimating()
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)) {
                 let contentsOfURL = NSData(contentsOfURL: url)
                 dispatch_async(dispatch_get_main_queue()) {
                     if url == self.imageURL {
                         if let imageData = contentsOfURL {
                             self.image = UIImage(data: imageData)
-                        } //else { self.spinner?.stopAnimating() }
+                        } else { self.spinner?.stopAnimating() }
                     } else {
                         print ("Ignored data returned url \(url)")
                     }
@@ -61,8 +80,13 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    // MARK: Scroll View Delegate
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return imageView
+    }
+    
+    func scrollViewWillBeginZooming(scrollView: UIScrollView, withView view: UIView?) {
+        isAutozooming = false
     }
     
     // MARK: - View Controller Lifecycle
@@ -76,6 +100,11 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         if image == nil {
             fetchImage()
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        autozooming()
     }
 
     /*

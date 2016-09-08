@@ -188,20 +188,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Agv-6B-PZI">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Agv-6B-PZI">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                             </scrollView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="rgV-ic-NSX">
+                                <rect key="frame" x="282" y="289" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Agv-6B-PZI" firstAttribute="leading" secondItem="Iu8-2p-uBP" secondAttribute="leading" id="7Sq-wG-WZo"/>
-                            <constraint firstItem="Agv-6B-PZI" firstAttribute="top" secondItem="Iu8-2p-uBP" secondAttribute="top" id="9fn-sZ-Lbu"/>
-                            <constraint firstAttribute="trailing" secondItem="Agv-6B-PZI" secondAttribute="trailing" id="k8Y-vZ-o9c"/>
-                            <constraint firstItem="Agv-6B-PZI" firstAttribute="bottom" secondItem="Z72-pF-ibl" secondAttribute="top" id="sJm-ax-IMn"/>
+                            <constraint firstItem="Agv-6B-PZI" firstAttribute="leading" secondItem="Iu8-2p-uBP" secondAttribute="leading" id="NX9-PV-A04"/>
+                            <constraint firstItem="rgV-ic-NSX" firstAttribute="centerY" secondItem="Agv-6B-PZI" secondAttribute="centerY" id="b5E-3G-3gn"/>
+                            <constraint firstItem="rgV-ic-NSX" firstAttribute="centerX" secondItem="Agv-6B-PZI" secondAttribute="centerX" id="e4r-cz-sSm"/>
+                            <constraint firstItem="Agv-6B-PZI" firstAttribute="top" secondItem="l1W-Af-YRs" secondAttribute="bottom" id="fcx-od-X2o"/>
+                            <constraint firstAttribute="trailing" secondItem="Agv-6B-PZI" secondAttribute="trailing" id="peZ-fy-TBh"/>
+                            <constraint firstItem="Agv-6B-PZI" firstAttribute="bottom" secondItem="Z72-pF-ibl" secondAttribute="top" id="t6V-jE-IdZ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="scrollView" destination="Agv-6B-PZI" id="OKG-6g-bBS"/>
+                        <outlet property="spinner" destination="rgV-ic-NSX" id="WJt-PC-xgO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cQ0-tY-xak" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -20,10 +20,17 @@ class ImageTableViewCell: UITableViewCell {
     
     private func updateUI() {
         if let url = imageUrl {
-            if let imageData = NSData(contentsOfURL: url) {
-                twitterImage.image = UIImage(data: imageData)
-                twitterImage.sizeToFit()
-            }
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), {
+                if let imageData = NSData(contentsOfURL: url) {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        if url == self.imageUrl {
+                        self.twitterImage.image = UIImage(data: imageData)
+                        self.twitterImage.sizeToFit()
+                        }
+                    })
+                }
+            })
+            
         }
     }
   

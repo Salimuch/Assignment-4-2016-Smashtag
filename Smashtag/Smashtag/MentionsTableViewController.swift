@@ -78,7 +78,7 @@ class MentionsTableViewController: UITableViewController {
         
         switch mention {
         case .image(_, let ratio):
-            return max(tableView.bounds.size.height,tableView.bounds.size.width) / CGFloat(ratio)
+            return tableView.bounds.size.width / CGFloat(ratio)
         default: return UITableViewAutomaticDimension
         }
     }

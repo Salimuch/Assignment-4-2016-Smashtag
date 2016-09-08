@@ -38,7 +38,6 @@ class HistoryTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.HistoryCell, forIndexPath: indexPath)
         cell.textLabel?.text = historyRequests[indexPath.row]
-        print("\(historyRequests[indexPath.row])")
         return cell
     }
 
@@ -77,14 +76,14 @@ class HistoryTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if  segue.identifier == Storyboard.FromHistorySegue {
+            if let tweetTVC = segue.destinationViewController as? TweetTableViewController,
+            let cell = sender as? UITableViewCell {
+                tweetTVC.searchText = cell.textLabel?.text
+            }
+        }
     }
-    */
 
 }
