@@ -33,6 +33,10 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    @IBAction func toRootViewController(sender: UIBarButtonItem) {
+        navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
     private var imageView = UIImageView()
 
     private var image: UIImage? {

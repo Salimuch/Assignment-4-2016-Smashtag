@@ -15,14 +15,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <textField key="tableHeaderView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Twitter Search Text" textAlignment="natural" minimumFontSize="17" id="5hy-Uk-XFG">
-                            <rect key="frame" x="0.0" y="64" width="600" height="30"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Tweet" rowHeight="154" id="k1M-Tv-biK" customClass="TweetTableViewCell" customModule="Smashtag" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="122" width="600" height="154"/>
+                                <rect key="frame" x="0.0" y="58" width="600" height="154"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k1M-Tv-biK" id="EYs-gE-X6M">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="153.5"/>
@@ -113,7 +113,7 @@
             </objects>
             <point key="canvasLocation" x="2666" y="265"/>
         </scene>
-        <!--Mentions Table View Controller-->
+        <!--Mentions-->
         <scene sceneID="yqJ-54-Mmt">
             <objects>
                 <tableViewController id="2n8-WK-uq7" customClass="MentionsTableViewController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
@@ -123,7 +123,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageMention" rowHeight="140" id="dh3-JZ-DrT" customClass="ImageTableViewCell" customModule="Smashtag" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="140"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="140"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dh3-JZ-DrT" id="FrU-oU-Egc">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="139.5"/>
@@ -146,7 +146,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OtherMention" textLabel="lMz-sE-A0Q" rowHeight="44" style="IBUITableViewCellStyleDefault" id="P3Y-4u-hjA">
-                                <rect key="frame" x="0.0" y="232" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="168" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P3Y-4u-hjA" id="2Uf-HA-Ipi">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -171,12 +171,19 @@
                             <outlet property="delegate" destination="2n8-WK-uq7" id="NIk-j3-ewY"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Mentions" id="RMR-Ke-8I9">
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="eeE-dc-69K">
+                            <connections>
+                                <action selector="toRootViewController:" destination="2n8-WK-uq7" id="k5H-66-xEP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WzD-c8-Egt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3373" y="265"/>
         </scene>
-        <!--Image View Controller-->
+        <!--Image-->
         <scene sceneID="fuw-CH-Cxf">
             <objects>
                 <viewController id="THT-vT-HTT" customClass="ImageViewController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
@@ -188,10 +195,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Agv-6B-PZI">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Agv-6B-PZI">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                             </scrollView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="rgV-ic-NSX">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="rgV-ic-NSX">
                                 <rect key="frame" x="282" y="289" width="37" height="37"/>
                             </activityIndicatorView>
                         </subviews>
@@ -205,6 +212,13 @@
                             <constraint firstItem="Agv-6B-PZI" firstAttribute="bottom" secondItem="Z72-pF-ibl" secondAttribute="top" id="t6V-jE-IdZ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Image" id="mkh-nv-uDD">
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="IvS-dw-0WP">
+                            <connections>
+                                <action selector="toRootViewController:" destination="THT-vT-HTT" id="xe8-Rg-L53"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="scrollView" destination="Agv-6B-PZI" id="OKG-6g-bBS"/>
                         <outlet property="spinner" destination="rgV-ic-NSX" id="WJt-PC-xgO"/>
@@ -212,7 +226,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cQ0-tY-xak" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4057" y="265"/>
+            <point key="canvasLocation" x="4201" y="19"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wd5-L1-fYW">
@@ -313,6 +327,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="muj-Oc-82k"/>
+        <segue reference="T6d-3X-zMK"/>
     </inferredMetricsTieBreakers>
 </document>

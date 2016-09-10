@@ -28,4 +28,10 @@ struct SearchStore {
         }
         defaults.setObject(newArray, forKey: "key")
     }
+    
+    static func removeAtIndex(index: Int) {
+        var requests = (defaults.objectForKey("key") as? [String]) ?? []
+        requests.removeAtIndex(index)
+        defaults.setObject(requests, forKey: "key")
+    }
 }

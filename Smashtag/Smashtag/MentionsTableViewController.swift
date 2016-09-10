@@ -12,21 +12,19 @@ import Twitter
 class MentionsTableViewController: UITableViewController {
     
     // MARK: - Internal Mentions Model
-    private var mentions: [MentionsStruct] = []
-    
-    private enum MentionType {
-        case image(NSURL, Double)
-        case keyWord(String)
-    }
-    
     private struct MentionsStruct {
         var type: String
         var mentions: [MentionType]
         var description: String {
             return ("\(type)")
         }
-        
     }
+    private enum MentionType {
+        case image(NSURL, Double)
+        case keyWord(String)
+    }
+    
+    private var mentions: [MentionsStruct] = []
     
     private func setMentions() {
         if let imageMention = tweet?.media where imageMention.count > 0{
@@ -41,9 +39,14 @@ class MentionsTableViewController: UITableViewController {
                 mentions.append(MentionsStruct(type: "hashtag",
                     mentions: hashtagMention.map { MentionType.keyWord($0.keyword) }))
         }
-        if let userMention = tweet?.userMentions where userMention.count > 0 {
+        if let userInfo = tweet?.userMentions where userInfo.count > 0 {
+            var users = [String]()
+            if let author = tweet?.user.screenName {
+               users.append("@" + author)
+            }
+            users.appendContentsOf(userInfo.map { $0.keyword })            
                 mentions.append(MentionsStruct(type: "userMention",
-                    mentions: userMention.map { MentionType.keyWord($0.keyword)} ))
+                    mentions: users.map { MentionType.keyWord($0)} ))
         }
     }
     
@@ -54,10 +57,15 @@ class MentionsTableViewController: UITableViewController {
         }
     }
     
+    // MARK: - Outlets
+    
+    @IBAction func toRootViewController(sender: UIBarButtonItem) {
+        navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 
     // MARK: - Table view data source
@@ -114,8 +122,12 @@ class MentionsTableViewController: UITableViewController {
             switch identifier {
             case Storyboard.OtherMentionSegue:
                 if let cell = sender as? UITableViewCell,
-                    let tweetTVC = segue.destinationViewController as? TweetTableViewController {
-                    tweetTVC.searchText = cell.textLabel?.text
+                    let tweetTVC = segue.destinationViewController as? TweetTableViewController,
+                    var text = cell.textLabel?.text {
+                    if text.hasPrefix("@") {
+                        text = text + " OR from: " + text
+                    }
+                    tweetTVC.searchText = text
                 }
             case Storyboard.ImageMentionSegue:
                 if let cell = sender as? ImageTableViewCell,

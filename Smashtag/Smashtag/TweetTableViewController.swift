@@ -118,6 +118,19 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let toRoot = UIBarButtonItem(barButtonSystemItem: .Stop,
+                                     target: self,
+                                     action: #selector(TweetTableViewController.toRootViewController(_:)))
+        if navigationController?.viewControllers.count > 1 {
+            if navigationController?.viewControllers.count > 0 {
+                navigationItem.rightBarButtonItem = toRoot
+            }
+        }
+    }
 
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -129,11 +142,13 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
                     let mentionsTVC = segue.destinationViewController as? MentionsTableViewController {
                     mentionsTVC.tweet = tweets[indexPath.section][indexPath.row]
                 }
-                
             default: break
             }
         }
     }
     
+    func toRootViewController(sender: UIBarButtonItem) {
+        navigationController?.popToRootViewControllerAnimated(true)
+    }
 
 }
